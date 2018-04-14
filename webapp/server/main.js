@@ -9,27 +9,27 @@ Meteor.methods({
     console.log("language, transcript:", language, transcript);
     var future = new Future();
 
-    enClient.analyseText(transcript).then(function(res) {
-      console.log("res.intent():", res.intent());
+    enClient.analyseText(transcript).then(function(text) {
+      console.log("text.intent():", text.intent());
 
-      let intent = res.intent();
+      let intent = text.intent();
       if (intent && intent.confidence > .6 &&
           intent.slug === "change-shirt-color" &&
-          res.entities.color) {
-        console.log("res.entities:", res.entities);
-        fs.writeFile("/tmp/over_here_arnaud", res.entities.color[0].rgb,
+          text.entities.color) {
+        console.log("text.entities:", text.entities);
+        fs.writeFile("/tmp/over_here_arnaud", text.entities.color[0].rgb,
             function(err) {
           if(err) {
             console.log("err:", err);
           }
 
-          console.log("The file was saved!", res.entities.color[0].rgb);
+          console.log("The file was saved!", text.entities.color[0].rgb);
         });
       }
 
       future.return({
         intent,
-        entities: res.entities,
+        entities: text.entities,
       });
     });
 

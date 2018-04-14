@@ -1,5 +1,5 @@
-import Home from './assets/js/HomeFunctions';
-import Intelligent from './assets/js/IntelligentFunctions';
+import Home from './functions/HomeFunctions';
+import Intelligent from './functions/IntelligentFunctions';
 
 // Template.home
 import * as html2canvas from 'html2canvas';
