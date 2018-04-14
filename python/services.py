@@ -91,13 +91,25 @@ def get_name(text=''):
 def answer(raw_input=''):
     keyword = get_keyword(raw_input)
     if keyword == 'price':
-        return '19.90 euros'
+        return '39.90 euros', keyword
     elif keyword == 'assist':
-        return 'We are calling an assistant!'
+        return 'Do you want me to call and assistant?', keyword
     elif keyword == 'size':
-        return 'Luckily there are sizes S, M and L available in this store.'
+        return 'Would you want to know the available sizes for this product?', keyword
     else:
-        return 'I did not understand that...'
+        return 'I did not understand that...', 'not_understood'
+
+
+def confirmation(raw_input='', keyword=''):
+    yes_score = mean_similarity_to_list(raw_input, ['yes', 'affirmative', 'sure'])
+    nop_score = mean_similarity_to_list(raw_input, ['no', 'negative'])
+    if yes_score > nop_score:
+        if keyword == 'assist':
+            return 'Okay, calling an assistant!'
+        elif keyword == 'size':
+            return 'Glad you asked, there are sizes S, M and L available in this store.'
+    else:
+        return 'Okay, can I help you in anything else?'
 
 
 def store_name(raw_input=''):
