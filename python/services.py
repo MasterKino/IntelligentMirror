@@ -68,8 +68,8 @@ def get_keyword(text=None):
     scores.append(mean_similarity_to_list(text, assistant_phrase_list))
     scores.append(mean_similarity_to_list(text, price_phrase_list))
     scores.append(mean_similarity_to_list(text, size_phrase_list))
-    for key, score in zip(keywords_list, scores):
-        print('{} has score:\t {}'.format(key, round(score, 2)))
+    # for key, score in zip(keywords_list, scores):
+    #     print('{} has score:\t {}'.format(key, round(score, 2)))
     keyword = keywords_list[int(np.argmax(scores))]
     if np.max(scores) > 0.2:
         return keyword
@@ -106,7 +106,3 @@ def store_name(raw_input=''):
     except:
         _name = get_name(raw_input)
     return 'Hi ' + _name
-
-
-respuesta = answer('this is too tight')
-print(respuesta)
