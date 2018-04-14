@@ -1,3 +1,7 @@
+import '../../Stylesheets/mirror_img.css';
+import '../../Stylesheets/modal.css';
+import '../../Stylesheets/microphone.css';
+
 const opts = {
 	lang: 'en'
 };
@@ -71,16 +75,41 @@ Template.productDetail.helpers({
 });
 
 Template.productDetail.events = {
-	'click .toggle-listening'(event, instance) {
+	'click .js-toggle-mic'(event, instance) {
 		instance.listening.set(!instance.listening.get());
 	},
 	'click .js-submit-text'(event, instance) {
 		sendTextToVoice(document.querySelector('.js-input-text').value);
+	},
+	'click .js-modal-close'(event, instance) {
+		// document.querySelector('.js-modal').classList.remove('visible');
+		event.currentTarget.parentElement.parentElement.classList.remove('visible');
+	},
+	'click .js-sa-modal'(event, instance) {
+		document.getElementById('SAModal').classList.add('visible');
+	},
+	'click .js-audio-modal'(event, instance) {
+		document.getElementById('audioModal').classList.add('visible');
 	}
 };
+//
+// function findAncestor (el, cls) {
+//     while ((el = el.parentElement) && !el.classList.contains(cls));
+//     return el;
+// }
+
+function updateScroll(){
+	var element = document.querySelector(".js-modal-list");
+	element.scrollTop = element.scrollHeight;
+}
 
 function sendTextToVoice(text) {
 	console.log('---[Sending Text Voice via Ajax]: ' + text);
+
+	let newLi = document.createElement('li');
+	newLi.appendChild(document.createTextNode(text));
+	newLi.classList.add('modal__question');
+	document.querySelector('.js-modal-list').appendChild(newLi);
 
 	$.ajax({
 		type: 'POST',
@@ -94,6 +123,18 @@ function sendTextToVoice(text) {
 		success: function(response) {
 			console.log('---[OK]: ');
 			console.log(response);
+
+			document.querySelector('.js-modal-response').classList.add('visible');
+			document.querySelector('.js-modal-header').classList.add('visible');
+
+			let newLi = document.createElement('li');
+			newLi.appendChild(document.createTextNode(response));
+			newLi.classList.add('modal__answer');
+
+			setTimeout(function() {
+				document.querySelector('.js-modal-list').appendChild(newLi);
+				updateScroll();
+			}, 300)
 		},
 		error: function(response, error) {
 			console.log('---[KO]: ');
