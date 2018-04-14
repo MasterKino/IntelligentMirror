@@ -34,7 +34,6 @@ def speak():
     # speak_out_loud(text)
     return '200'
 
-
 @app.route('/answer', methods=['GET', 'POST'])
 @cross_origin(origin='*', headers=['Content-Type','Authorization'])
 def answer_question():
@@ -44,7 +43,6 @@ def answer_question():
     # print(text)
     response = answer(text)
     return response
-
 
 if __name__ == '__main__':
     app.run(host='localhost', debug=True)
