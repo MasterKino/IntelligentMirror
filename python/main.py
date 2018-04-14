@@ -3,6 +3,7 @@ from flask import Flask, Response, request
 from flask_cors import CORS, cross_origin
 from camera import VideoCamera
 from speak import speak_out_loud
+from speak import answer
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/foo": {"origins": "*"}})
@@ -10,8 +11,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/')
-# def index():
-#   return render_template('index.html')
 def gen(camera):
     while True:
         frame = camera.get_frame()
@@ -35,15 +34,15 @@ def speak():
     print(text)
     # speak_out_loud(text)
     return '200'
-# 
-# @app.route('/load_ajax', methods=['GET', 'POST'])
-# @cross_origin(origin='*', headers=['Content-Type','Authorization'])
-# def load_ajax():
-#     data = request.data
-#     text = json.loads(data)['text']
-#     print(text)
-#     # return ', '.join([str(i) for i in vars])
-#     return '200'
+
+
+@app.route('/answer', methods=['GET', 'POST'])
+@cross_origin(origin='*', headers=['Content-Type','Authorization'])
+def answer_question():
+    data = request.data
+    text = json.loads(data)['text']
+    resonse = answer(text)
+    return json.dumps({'answer': resonse})
 
 
 if __name__ == '__main__':
