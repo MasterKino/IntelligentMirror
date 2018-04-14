@@ -27,21 +27,11 @@
             <button type="button" class="toggle-listening btn
                   btn-{{#if isListening}}success{{else}}default{{/if}}">
               {{#if isListening}}
-                Listening in {{getLanguage}}
+                Listening
               {{else}}
                 Not listening
               {{/if}}
             </button>
-            <button type="button" class="dropdown-toggle btn
-                  btn-{{#if isListening}}success{{else}}default{{/if}}"
-                data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li class="select-english"><a href="">English</a></li>
-              <li class="select-french"><a href="">French</a></li>
-            </ul>
           </div>
         </h4>
         <p>You say things such as:</p>

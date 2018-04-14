@@ -33,6 +33,10 @@ Meteor.methods({
       });
     });
 
+    console.log("Returning recast intent: ");
+    console.log(future.intent);
+    console.log(future.entities);
+
     return future.wait();
   },
 });
