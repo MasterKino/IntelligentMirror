@@ -1,0 +1,10 @@
+.related-products {
+    text-align: center;
+}
+
+.related-products__slider {
+    display: flex;
+    max-width: 100%;
+    overflow-x: scroll;
+    padding: 10px 0;
+}

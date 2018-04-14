@@ -1,0 +1,22 @@
+{
+    "relatedProd" : [{
+        "image": "related-1.jpg",
+        "price": "€ 39,95",
+        "link": "https://www.adidas.es"
+    },
+    {
+        "image": "related-2.jpg",
+        "price": "€ 39,95",
+        "link": "https://www.adidas.es"
+    },
+    {
+        "image": "related-3.jpg",
+        "price": "€ 39,95",
+        "link": "https://www.adidas.es"
+    },
+    {
+        "image": "related-4.jpg",
+        "price": "€ 39,95",
+        "link": "https://www.adidas.es"
+    }]
+}

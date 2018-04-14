@@ -1,0 +1,10 @@
+<template name="relatedProducts">
+    <div class="related-products">
+        <h2 class="t-h2">Other customers also viewed:</h2>
+        <div class="related-products__slider">
+            {{#each products}}
+                {{> product image=image price=price link=link}}
+            {{/each}}
+        </div>
+    </div>
+</template>
