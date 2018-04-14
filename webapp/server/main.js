@@ -17,7 +17,7 @@ Meteor.methods({
           intent.slug === "change-shirt-color" &&
           text.entities.color) {
         console.log("text.entities:", text.entities);
-        fs.writeFile("/tmp/over_here_arnaud", text.entities.color[0].rgb,
+        fs.writeFile("/tmp/hackadidas_color", text.entities.color[0].rgb,
             function(err) {
           if(err) {
             console.log("err:", err);
