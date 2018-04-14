@@ -12,3 +12,4 @@ function sameNameAndAction(name) {
 
 FlowRouter.route("/", sameNameAndAction("home"));
 FlowRouter.route("/detail", sameNameAndAction("productDetail"));
+FlowRouter.route("/mirror", sameNameAndAction("mirror"));
