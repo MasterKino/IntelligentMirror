@@ -71,6 +71,7 @@ html, body {
     height: 100vh;
 }
 
+button { border: 0; }
 
 .u-wrapper {
     margin: 0 auto;

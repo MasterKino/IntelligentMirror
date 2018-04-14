@@ -34,8 +34,8 @@ def speak():
     text = json.loads(data)['text']
     print(text)
     # speak_out_loud(text)
-    return '200'
-# 
+    return text
+#
 # @app.route('/load_ajax', methods=['GET', 'POST'])
 # @cross_origin(origin='*', headers=['Content-Type','Authorization'])
 # def load_ajax():

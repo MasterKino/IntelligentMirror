@@ -1,0 +1,65 @@
+.microphone {
+    position: relative;
+    border-radius: 4px;
+    padding: 5px;
+    transition: background-color .2s ease-out;
+}
+
+.microphone:focus {
+    background-color: rgba(245, 245, 245, 0.8);
+    outline: none;
+}
+
+.microphone span {
+    border-radius: 50%;
+    display: block;
+    height: 50px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    z-index: 0;
+}
+
+.microphone--active span {
+    background-color: rgba(2, 134, 205);
+    animation: pulse 1.5s infinite;
+}
+
+.microphone img {
+    width: 60px;
+    position: relative;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        opacity: .6;
+        height: 50px;
+        width: 50px;
+    }
+    70% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        height: 80px;
+        width: 80px;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: .6;
+        height: 50px;
+        width: 50px;
+    }
+    70% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        height: 80px;
+        width: 80px;
+    }
+}
