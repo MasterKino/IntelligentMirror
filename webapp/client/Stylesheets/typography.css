@@ -1,0 +1,73 @@
+/* Typography */
+h1, .t-h1,
+h2, .t-h2 { font-weight: 700; }
+
+h3, .t-h3,
+h4, .t-h4 { font-weight: 300; }
+
+h1, .t-h1 { line-height: 1; }
+
+h2, .t-h2 {
+    line-height: 1.4;
+}
+
+
+h3, .t-h3 { line-height: 1.5; }
+
+
+b, strong { font-weight: 700; }
+.italic { font-style: italic; }
+
+p {
+    font-size: 16px;
+    margin: 0 0 space();
+}
+
+.p-big {
+    font-size: 20px;
+    line-height: 28px;
+}
+
+a,
+.link {
+    border: 0;
+    color: #0286CB;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+a:hover,
+.link:hover {
+    color: #0286CB;
+    text-decoration: underline;
+}
+
+.button {
+    background: #0286cd;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    display: inline-block;
+    border: 0;
+    transition: background .1s cubic-bezier(.3,0,.45,1);
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    min-width: 300px;
+    padding: 0 20px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.button:hover {
+    background: #025f8e;
+}
