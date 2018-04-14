@@ -65,49 +65,52 @@ class VideoCamera(object):
 
     def get_frame(self):
         success, image = self.video.read()
-        # We are using Motion JPEG, but OpenCV defaults to capture raw images,
-        # so we must encode it into JPEG in order to correctly display the
-        # video stream.
-        (h, w, d) = image.shape
-        # w:h == 9:16
-        width = math.floor((9*h/16)/2)
-        stx = math.floor(w/2) - width
-        endx = math.floor(w/2) + width
-        img = image[0:h, stx:endx]
+        if success:
+            # We are using Motion JPEG, but OpenCV defaults to capture raw images,
+            # so we must encode it into JPEG in order to correctly display the
+            # video stream.
+            (h, w, d) = image.shape
+            # w:h == 9:16
+            width = math.floor((9*h/16)/2)
+            stx = math.floor(w/2) - width
+            endx = math.floor(w/2) + width
+            img = image[0:h, stx:endx]
 
-        if not self.initialized:
-            # Add silouhette
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            resized = cv2.resize(self.silouhette, (endx-stx, h))
-            head_x = math.floor((endx-stx)/2)
-            head_y = math.floor(h*140/720)
+            if not self.initialized:
+                # Add silouhette
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                resized = cv2.resize(self.silouhette, (endx-stx, h))
+                head_x = math.floor((endx-stx)/2)
+                head_y = math.floor(h*140/720)
 
-            faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-            if len(faces) > 0:
-                (x, y, wf, hf) = faces[0]
-                x_c = math.floor(x + wf/2)
-                y_c = math.floor(y + hf/2)
-                # print(abs(head_x-x)+abs(head_y-y))
-                if abs(head_x-x_c)+abs(head_y-y_c) < 50:
-                    if wf < (endx-stx)/2:
-                        self.initTimer += 1
-                        cv2.rectangle(img, (x, y), (x+wf, y+hf), (0, 255, 0), 2)
+                faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+                if len(faces) > 0:
+                    (x, y, wf, hf) = faces[0]
+                    x_c = math.floor(x + wf/2)
+                    y_c = math.floor(y + hf/2)
+                    # print(abs(head_x-x)+abs(head_y-y))
+                    if abs(head_x-x_c)+abs(head_y-y_c) < 50:
+                        if wf < (endx-stx)/2:
+                            self.initTimer += 1
+                            cv2.rectangle(img, (x, y), (x+wf, y+hf), (0, 255, 0), 2)
+                        else:
+                            cv2.rectangle(img, (x, y), (x+wf, y+hf), (0, 255, 255), 2)
                     else:
-                        cv2.rectangle(img, (x, y), (x+wf, y+hf), (0, 255, 255), 2)
-                else:
-                    cv2.rectangle(img, (x, y), (x+wf, y+hf), (0, 0, 255), 2)
+                        cv2.rectangle(img, (x, y), (x+wf, y+hf), (0, 0, 255), 2)
 
-            if self.initTimer >= 100:
-                self.shirt = Shirt(img)
-                self.initialized = True
+                if self.initTimer >= 100:
+                    self.shirt = Shirt(img)
+                    self.initialized = True
 
-            img = cv2.add(img, resized)
+                img = cv2.add(img, resized)
+            else:
+                # Can colorize if needed
+                if self.colorize and self.shirt is not None:
+                    img = self.shirt.change_color(img, self.color)
+            ret, jpeg = cv2.imencode('.jpg', img)
+            return jpeg.tobytes()
         else:
-            # Can colorize if needed
-            if self.colorize and self.shirt is not None:
-                img = self.shirt.change_color(img, self.color)
-        ret, jpeg = cv2.imencode('.jpg', img)
-        return jpeg.tobytes()
+            return None
 
     def set_color(self, color):
         self.colorize = True
