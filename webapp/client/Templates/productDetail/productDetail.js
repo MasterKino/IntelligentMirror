@@ -87,7 +87,7 @@ function sendTextToVoice(text) {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		url: 'http://localhost:5000/load_ajax',
+		url: 'http://localhost:5000/speak',
 		data: JSON.stringify({
 			text: text
 		}),
