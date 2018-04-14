@@ -2,8 +2,7 @@ import json
 from flask import Flask, Response, request
 from flask_cors import CORS, cross_origin
 from camera import VideoCamera
-from speak import speak_out_loud
-from speak import answer
+from services import answer, speak_out_loud
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/foo": {"origins": "*"}})
@@ -41,8 +40,10 @@ def speak():
 def answer_question():
     data = request.data
     text = json.loads(data)['text']
-    resonse = answer(text)
-    return json.dumps({'answer': resonse})
+    # text = request.form['text']
+    # print(text)
+    response = answer(text)
+    return response
 
 
 if __name__ == '__main__':
