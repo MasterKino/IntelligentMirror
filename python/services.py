@@ -19,9 +19,16 @@ size_phrase_list = ['are there other sizes',
                     'this is too small',
                     'this is too large']
 
+cart_phrase_list = ['put this to the cart',
+                    'cart']
+wishlist_phrase_list = ['put this to the wish list',
+                        'wish list']
+
 keywords_list = ['assist',
                  'price',
-                 'size']
+                 'size',
+                 'cart',
+                 'wishlist']
 
 
 def get_human_names(text=''):
@@ -68,6 +75,8 @@ def get_keyword(text=None):
     scores.append(mean_similarity_to_list(text, assistant_phrase_list))
     scores.append(mean_similarity_to_list(text, price_phrase_list))
     scores.append(mean_similarity_to_list(text, size_phrase_list))
+    scores.append(mean_similarity_to_list(text, cart_phrase_list))
+    scores.append(mean_similarity_to_list(text, wishlist_phrase_list))
     # for key, score in zip(keywords_list, scores):
     #     print('{} has score:\t {}'.format(key, round(score, 2)))
     keyword = keywords_list[int(np.argmax(scores))]
@@ -96,6 +105,10 @@ def answer(raw_input=''):
         return 'Do you want me to call and assistant?', keyword
     elif keyword == 'size':
         return 'Would you want to know the available sizes for this product?', keyword
+    elif keyword == 'cart':
+        return 'Do you want to add this to your cart?', keyword
+    elif keyword == 'wishlist':
+        return 'Do you want to add this to your wishlist?', keyword
     else:
         return 'I did not understand that...', 'not_understood'
 
@@ -108,6 +121,10 @@ def confirmation(raw_input='', keyword=''):
             return 'Okay, calling an assistant!'
         elif keyword == 'size':
             return 'Glad you asked, there are sizes S, M and L available in this store.'
+        elif keyword == 'cart':
+            return 'Successfully added to yout cart'
+        elif keyword == 'wishlist':
+            return 'Successfully added to your wishlist'
     else:
         return 'Okay, can I help you in anything else?'
 
@@ -118,3 +135,11 @@ def store_name(raw_input=''):
     except:
         _name = get_name(raw_input)
     return 'Hi ' + _name
+
+
+# def profile(name):
+#     if name = 'John':
+#         return 'Name: John Smith \n Gender: Male \n Size: XL'
+#
+#     if name = 'Angelina':
+#         return 'Name: Angelina Jolie \n Gender: Female \n Size: M'
