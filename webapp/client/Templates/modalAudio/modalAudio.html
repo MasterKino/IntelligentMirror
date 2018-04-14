@@ -1,0 +1,16 @@
+<template name="modalAudio">
+    <div id="audioModal" class="modal js-modal">
+        <div class="modal__content">
+            <button type="button" name="button" class="modal__close js-modal-close">&times;</button>
+            <div class="modal__header js-modal-header">
+                <button type="button" class="js-toggle-mic microphone {{#if isListening}}microphone--active{{/if}}">
+                    <img src="/img/mic.svg" alt=""/>
+                    <span></span>
+                </button>
+            </div>
+            <div class="modal__body js-modal-response">
+                <ul class="modal__response js-modal-list"></ul>
+            </div>
+        </div>
+    </div>
+</template>
