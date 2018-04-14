@@ -1,15 +1,23 @@
 .product-detail {
     display: flex;
+    height: calc(100vh - 84px);
 }
 
 .product-detail__info,
 .product-detail__mirror {
-    position: relative;
     flex-grow: 1;
+    position: relative;
+    width: 50%;
+}
+
+.product-detail__mirror {
+    align-items: center;
+    display: flex;
 }
 
 .product-detail__mic {
     box-shadow: 0 6px 20px 0 rgba(0,0,0,.19);
+    background-color: #fff;
     position: absolute;
     top: 1rem;
     right: 2rem;

@@ -1,5 +1,5 @@
 .mirror {
-    height: 100vh;
+    height: calc(100vh - 84px);
     padding: 1rem;
     position: relative;
     width: 100vw;
