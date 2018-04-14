@@ -1,0 +1,31 @@
+.product-detail {
+    display: flex;
+}
+
+.product-detail__info,
+.product-detail__mirror {
+    position: relative;
+    flex-grow: 1;
+}
+
+.product-detail__mic {
+    box-shadow: 0 6px 20px 0 rgba(0,0,0,.19);
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    transition: background-color .2s ease-out;
+}
+
+.product-detail__mic:hover,
+.product-detail__mic:focus {
+    background-color: rgba(245, 245, 245, 0.8);
+    outline: none;
+}
+
+.product-detail__mic img {
+    height: 50px;
+    margin: 0 auto;
+}
