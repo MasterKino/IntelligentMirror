@@ -1,20 +1,16 @@
 <head>
   <meta charset="utf-8">
-  <title>Fitting Room of the Future</title>
-  <meta name="description" content="Get the latest news, checkout hand-picked recipes, and share with other locals.">
+  <title>adidas | Adidas Mirror Experience</title>
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1" />
   <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
   <link rel="stylesheet" href="/css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 </head>
-
-<body>
+<template name="appBody">
     <header class="header">
-        <div class="u-wrapper u-flex u-flex--align-center u-flex--justify-between">
-            <img src="/adidas-logo-white.svg" class="header__logo" alt=""/>
+        <div class="u-wrapper">
+            <img src="/img/adidas-logo-white.svg" class="header__logo" alt=""/>
         </div>
     </header>
-</body>
-
-<template name="appBody">
-  {{> Template.dynamic template=content data=params}}
+    {{> Template.dynamic template=content data=params}}
 </template>

@@ -1,18 +1,7 @@
-import Home from './functions/HomeFunctions';
-import Intelligent from './functions/IntelligentFunctions';
+import '../node_modules/normalize.css/normalize.css';
+import './Stylesheets/main.css';
+import './Stylesheets/header.css';
+import './Stylesheets/typography.css';
 
-// Template.home
 import * as html2canvas from 'html2canvas';
 console.log('html2canvas:', html2canvas);
-
-// Template.home
-// Template.home.created = Home.onCreated;
-Template.home.rendered = Home.onRendered;
-Template.home.events = Home.events;
-
-// Template.productDetail
-Template.productDetail.created = Intelligent.onCreated;
-Template.productDetail.destroyed = Intelligent.onDestroyed;
-Template.productDetail.rendered = Intelligent.onRendered;
-Template.productDetail.helpers = Intelligent.helpers;
-Template.productDetail.events = Intelligent.events;
