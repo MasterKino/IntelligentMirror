@@ -82,7 +82,6 @@ Template.productDetail.events = {
 		sendTextToVoice(document.querySelector('.js-input-text').value);
 	},
 	'click .js-modal-close'(event, instance) {
-		// document.querySelector('.js-modal').classList.remove('visible');
 		event.currentTarget.parentElement.parentElement.classList.remove('visible');
 	},
 	'click .js-sa-modal'(event, instance) {
@@ -92,11 +91,6 @@ Template.productDetail.events = {
 		document.getElementById('audioModal').classList.add('visible');
 	}
 };
-//
-// function findAncestor (el, cls) {
-//     while ((el = el.parentElement) && !el.classList.contains(cls));
-//     return el;
-// }
 
 function updateScroll(){
 	var element = document.querySelector(".js-modal-list");
@@ -116,7 +110,7 @@ function sendTextToVoice(text) {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		url: 'http://localhost:5000/speak',
+		url: 'http://localhost:5000/answer',
 		data: JSON.stringify({
 			text: text
 		}),
