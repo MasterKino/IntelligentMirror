@@ -1,0 +1,11 @@
+.mirror {
+    height: 100vh;
+    padding: 1rem;
+    position: relative;
+    width: 100vw;
+}
+
+.mirror img {
+    height: 90%;
+    margin: 0 auto;
+}
