@@ -2,7 +2,7 @@ import json
 from flask import Flask, Response, request
 from flask_cors import CORS, cross_origin
 from camera import VideoCamera
-from services import answer, speak_out_loud
+from services import answer, confirmation, speak_out_loud
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/foo": {"origins": "*"}})
@@ -42,7 +42,21 @@ def answer_question():
     text = json.loads(data)['text']
     # text = request.form['text']
     # print(text)
-    response = answer(text)
+    response, keyword = answer(text)
+    return response
+
+
+@app.route('/confirmation', methods=['GET', 'POST'])
+@cross_origin(origin='*', headers=['Content-Type','Authorization'])
+def question_confirmation():
+    # data = request.data
+    # text = json.loads(data)['text']
+    # keyword = json.loads(data)['keyword']
+    text = request.form['text']
+    keyword = request.form['keyword']
+    print(text)
+    print(keyword)
+    response = confirmation(text, keyword)
     return response
 
 
