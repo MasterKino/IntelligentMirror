@@ -52,7 +52,7 @@ Template.productDetail.rendered = function() {
 	// instance.recognition.lang = instance.data.language;
 };
 
-Template.productDetail.helpers = {
+Template.productDetail.helpers({
 	getTranscript() {
 		return Template.instance().transcript.get();
 	},
@@ -90,7 +90,7 @@ Template.productDetail.helpers = {
 			entities && entities.color && entities.color[0].raw.toLowerCase()
 		);
 	}
-};
+});
 
 Template.productDetail.events = {
 	'click .toggle-listening'(event, instance) {

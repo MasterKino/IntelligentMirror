@@ -45,17 +45,16 @@ a:hover,
 }
 
 .button {
-    background: #0286cd;
+    color: #fff;
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
     line-height: 50px;
     font-weight: bold;
     text-transform: uppercase;
-    color: #fff;
     display: inline-block;
     border: 0;
-    transition: background .1s cubic-bezier(.3,0,.45,1);
+    transition: background .1s cubic-bezier(.3,0,.45,1), color .1s cubic-bezier(.3,0,.45,1);
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -68,6 +67,21 @@ a:hover,
     overflow: hidden;
 }
 
-.button:hover {
+.button--primary {
+    background: #0286cd;
+    border: 1px solid #0286cd;
+}
+
+.button--primary:hover {
     background: #025f8e;
+    border: 1px solid #025f8e;
+}
+
+.button--secondary {
+    border: 1px solid #fff;
+}
+
+.button--secondary:hover {
+    background: #fff;
+    color: #0286cd;
 }
