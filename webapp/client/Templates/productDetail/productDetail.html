@@ -2,12 +2,26 @@
     {{> headermain toggleView='mirror' toggleText='Toggle Mirror View'}}
     <main class="product-detail">
         <div class="product-detail__mirror">
-            <!-- <img id="video-feed" class="mirror-img" src="http://localhost:5000/video_feed" alt=""> -->
+            <img id="video-feed" class="mirror-img" src="http://localhost:5000/video_feed" alt="">
         </div>
-        <div class="product-detail__info">
+        <div class="product-detail__info loaded">
             <button type="button" class="js-audio-modal product-detail__mic">
                 <img src="/img/mic.svg" alt=""/>
             </button>
+            <div class="product-detail__product">
+                <img src="/img/product.jpg" alt="">
+                <h1 class="t-h1">3-STRIPES TEE</h1>
+                <p class="product-detail__price">€ 34,95</p>
+                <h3>Available Sizes:</h3>
+                <div class="product-detail__sizes">
+                    <span class="disabled">XS</span>
+                    <span>S</span>
+                    <span>M</span>
+                    <span>L</span>
+                    <span class="disabled">XL</span>
+                </div>
+            </div>
+            {{> relatedProducts}}
         </div>
     </main>
     {{> modalAudio}}
