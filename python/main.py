@@ -27,22 +27,23 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-# @app.route('/speak', methods=['GET', 'POST'])
-# @cross_origin(origin='*', headers=['Content-Type','Authorization'])
-# def speak():
-#     data = request.data
-#     text = json.loads(data)['text']
-#     # speak_out_loud(text)
-#     return '200'
-
-@app.route('/load_ajax', methods=['GET', 'POST'])
+@app.route('/speak', methods=['GET', 'POST'])
 @cross_origin(origin='*', headers=['Content-Type','Authorization'])
-def load_ajax():
+def speak():
     data = request.data
     text = json.loads(data)['text']
     print(text)
-    # return ', '.join([str(i) for i in vars])
+    # speak_out_loud(text)
     return '200'
+# 
+# @app.route('/load_ajax', methods=['GET', 'POST'])
+# @cross_origin(origin='*', headers=['Content-Type','Authorization'])
+# def load_ajax():
+#     data = request.data
+#     text = json.loads(data)['text']
+#     print(text)
+#     # return ', '.join([str(i) for i in vars])
+#     return '200'
 
 
 if __name__ == '__main__':
