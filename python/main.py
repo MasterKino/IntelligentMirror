@@ -32,13 +32,16 @@ def video_feed():
 def speak():
     data = request.data
     text = json.loads(data)['text']
-    speak_out_loud(text)
+    print(text)
+    # speak_out_loud(text)
     return '200'
-
+# 
 # @app.route('/load_ajax', methods=['GET', 'POST'])
 # @cross_origin(origin='*', headers=['Content-Type','Authorization'])
 # def load_ajax():
-#     vars = request.data
+#     data = request.data
+#     text = json.loads(data)['text']
+#     print(text)
 #     # return ', '.join([str(i) for i in vars])
 #     return '200'
 
