@@ -19,6 +19,7 @@
 .product-detail__info {
     opacity: 0;
     transition: opacity .4s ease-out;
+    transition-delay: .5s;
 }
 
 .product-detail__info.loaded {
