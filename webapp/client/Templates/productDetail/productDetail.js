@@ -93,13 +93,39 @@ Template.productDetail.helpers({
 });
 
 Template.productDetail.events = {
-	'click .toggle-listening'(event, instance) {
-		instance.listening.set(!instance.listening.get());
-	},
-	'click .select-english'(event, instance) {
-		instance.language.set('English');
-	}
+	// 'click .toggle-listening'(event, instance) {
+	// 	instance.listening.set(!instance.listening.get());
+	// },
+	// 'click .select-english'(event, instance) {
+	// 	instance.language.set('English');
+	// },
+	'click .js-submit-text': sendTextToVoice
 };
+
+function sendTextToVoice() {
+	var text = document.querySelector('.js-input-text').value;
+	console.log("---[Sending Ajax]: " + text);
+
+	$.ajax({
+		type: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		url: 'http://localhost:5000/speak',
+		data: JSON.stringify({
+			text: text
+		}),
+		success: function(response) {
+			console.log('---[OK] : ');
+			console.log(response);
+		},
+		error: function(response, error) {
+			console.log('---[KO] : ');
+			console.log(response);
+			console.log(error);
+		}
+	});
+}
 
 function setupRecognition(instance, language) {
 	instance.recognition.continuous = true;

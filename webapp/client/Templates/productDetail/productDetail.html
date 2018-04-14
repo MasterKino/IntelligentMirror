@@ -1,6 +1,6 @@
 <template name="productDetail">
     {{> headermain toggleView='mirror' toggleText='Toggle Mirror View'}}
-  <div class="container" id="everything-else">
+  <main class="product-detail" id="everything-else">
     <div class="row">
       <div class="col-sm-6">
         <img id="video-feed" src="http://localhost:5000/video_feed" alt="" style="width: 100%">
@@ -13,6 +13,12 @@
         </h4>
 
         <hr>
+
+        <input type="text" name="" value="" class="js-input-text">
+        <button type="button" name="button" class="js-submit-text">
+            submit text
+        </button>
+
 
         <h4>
           How can I help?
@@ -117,5 +123,5 @@
         </div>
       </div>
     </div>
-  </div>
+</main>
 </template>
