@@ -37,13 +37,7 @@ class MyEventHandler(PatternMatchingEventHandler):
 
 class VideoCamera(object):
     def __init__(self):
-        # Using OpenCV to capture from device 0. If you have trouble capturing
-        # from a webcam, comment the line below out and use a video file
-        # instead.
         self.video = cv2.VideoCapture(0)
-        # If you decide to use video.mp4, you must have this file in the folder
-        # as the main.py.
-        # self.video = cv2.VideoCapture('video.mp4')
         self.initialized = False
         self.initTimer = 0
         self.silouhette = cv2.imread('silou.png')
@@ -71,7 +65,7 @@ class VideoCamera(object):
             # video stream.
             (h, w, d) = image.shape
             # w:h == 9:16
-            width = math.floor((9*h/16)/2)
+            width = math.floor((11*h/16)/2)
             stx = math.floor(w/2) - width
             endx = math.floor(w/2) + width
             img = image[0:h, stx:endx]
@@ -79,7 +73,7 @@ class VideoCamera(object):
             if not self.initialized:
                 # Add silouhette
                 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                resized = cv2.resize(self.silouhette, (endx-stx, h))
+                # resized = cv2.resize(self.silouhette, (endx-stx, h))
                 head_x = math.floor((endx-stx)/2)
                 head_y = math.floor(h*140/720)
 
@@ -91,18 +85,18 @@ class VideoCamera(object):
                     # print(abs(head_x-x)+abs(head_y-y))
                     if abs(head_x-x_c)+abs(head_y-y_c) < 50:
                         if wf < (endx-stx)/2:
-                            self.initTimer += 1
+                            # self.initTimer += 1
                             cv2.rectangle(img, (x, y), (x+wf, y+hf), (0, 255, 0), 2)
                         else:
                             cv2.rectangle(img, (x, y), (x+wf, y+hf), (0, 255, 255), 2)
                     else:
                         cv2.rectangle(img, (x, y), (x+wf, y+hf), (0, 0, 255), 2)
 
-                if self.initTimer >= 100:
-                    self.shirt = Shirt(img)
-                    self.initialized = True
+                # if self.initTimer >= 100:
+                #     self.shirt = Shirt(img)
+                #     self.initialized = True
 
-                img = cv2.add(img, resized)
+                # img = cv2.add(img, resized)
             else:
                 # Can colorize if needed
                 if self.colorize and self.shirt is not None:
