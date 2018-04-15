@@ -3,3 +3,5 @@ python/__pycache__
 
 node_modules/
 .meteor
+.idea/
+IntelligentMirror.iml

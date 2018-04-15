@@ -12,7 +12,7 @@
 		"meteor-node-stubs": "^0.3.2",
 		"normalize.css": "^8.0.0",
 		"recastai": "^3.7.0",
-        "swiper": "^4.1.6"
+		"swiper": "^4.2.2"
 	},
 	"devDependencies": {
 		"@meteorjs/eslint-config-meteor": "^1.0.5",
