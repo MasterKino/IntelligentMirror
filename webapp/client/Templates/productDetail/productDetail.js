@@ -135,7 +135,7 @@ function sendTextToVoice(text, instance) {
 
 				opts.pythonRoute = 'answer';
 
-				if (response == 'assist') {
+				if (response.indexOf('assist') > 0) {
 					document.getElementById('audioModal').classList.remove('visible');
 					document.getElementById('SAModal').classList.add('visible');
 				} else {
