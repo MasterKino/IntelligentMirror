@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.related-products .t-h2 {
+    margin-bottom: 10px;
+}
+
 .related-products__slider {
     display: flex;
     max-width: 100%;
