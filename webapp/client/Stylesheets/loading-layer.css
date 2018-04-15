@@ -1,0 +1,44 @@
+.loading-layer {
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    right: 0;
+    top: 0;
+    height: 100%;
+    bottom: 0;
+    z-index: 9;
+    transition: width .4s ease-out;
+}
+
+.loading-layer span {
+    background-color: #000;
+    display: block;
+    position: absolute;
+    width: 0;
+    left: 0;
+    height: 50px;
+    transition: width .3s ease-out;
+}
+
+.loading-layer span:nth-child(1) {
+    top: 10%;
+    transition-delay: .2s;
+}
+
+.loading-layer span:nth-child(2) {
+    top: 20%;
+    transition-delay: .4s;
+}
+
+.loading-layer span:nth-child(3) {
+    top: 30%;
+    transition-delay: .6s;
+}
+
+.loading-layer.in span {
+    width: 100%;
+}
+
+.loading-layer.in.out {
+    width: 0;
+}

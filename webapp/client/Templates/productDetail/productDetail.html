@@ -1,10 +1,15 @@
 <template name="productDetail">
     {{> headermain toggleView='mirror' toggleText='Toggle Mirror View'}}
     <main class="product-detail">
+        <div class="loading-layer js-loading-layer">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <div class="product-detail__mirror">
             {{> imageMirror}}
         </div>
-        <div class="product-detail__info js-product-info loaded">
+        <div class="product-detail__info js-product-info">
             <button type="button" class="js-audio-modal product-detail__mic">
                 <img src="/img/mic.svg" alt=""/>
             </button>

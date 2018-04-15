@@ -2,6 +2,7 @@ import './home.css';
 
 Template.home.rendered = function() {
     console.log("--[Rendered]-----------");
+    document.querySelector('.js-home').classList.add('loaded');
 };
 
 Template.home.events = {

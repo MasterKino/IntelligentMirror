@@ -1,10 +1,14 @@
 import '../../Stylesheets/mirror_img.css';
 import '../../Stylesheets/modal.css';
 import '../../Stylesheets/microphone.css';
+import '../../Stylesheets/loading-layer.css';
 
 const opts = {
 	lang: 'en',
-	pythonRoute: 'name'
+	pythonRoute: 'name',
+	'loadingLayer': '.js-loading-layer',
+	'product_info': '.js-product-info',
+	'loaded': false
 };
 
 // Template.productDetail
@@ -40,7 +44,25 @@ Template.productDetail.destroyed = function() {
 Template.productDetail.onRendered(function () {
 	let instance = this;
 
-	// document.querySelector
+	if (!opts.loaded) {
+		setTimeout(function() {
+			document.querySelector(opts.loadingLayer).classList.add('in');
+		}, 100);
+
+		setTimeout(function() {
+			document.querySelector(opts.loadingLayer).classList.add('out');
+		}, 1400);
+
+		setTimeout(function() {
+			document.querySelector(opts.product_info).classList.add('loaded');
+		}, 1500);
+
+		opts.loaded = true;
+	} else {
+		const loader = document.querySelector(opts.loadingLayer);
+		loader.parentNode.removeChild(loader);
+		document.querySelector(opts.product_info).classList.add('loaded');
+	}
 });
 
 Template.productDetail.helpers({

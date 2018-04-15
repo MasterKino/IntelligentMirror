@@ -10,10 +10,10 @@ Template.imageMirror.rendered = function() {
 	img.setAttribute("id", "video-feed");
 
 	document.querySelector(opts.image_wrapper).appendChild(img);
-
-	img.onload = function() {
-		if (document.querySelector(opts.product_info)) {
-			document.querySelector(opts.product_info).classList.add('loaded')
-		}
-	}
+	// 
+	// img.onload = function() {
+	// 	if (document.querySelector(opts.product_info)) {
+	// 		document.querySelector(opts.product_info).classList.add('loaded')
+	// 	}
+	// }
 };
