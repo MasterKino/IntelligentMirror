@@ -6,6 +6,14 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/foo": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+respuesta = None
+
+
+def generate_respuesta():
+    global respuesta
+    respuesta = Response(gen(VideoCamera()),
+                         mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 def gen(camera):
     while True:
@@ -18,8 +26,9 @@ def gen(camera):
 @app.route('/video_feed')
 @cross_origin(origin='*', headers=['Content-Type', 'Authorization'])
 def video_feed():
-    return Response(gen(VideoCamera()),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    if respuesta is None:
+        generate_respuesta()
+    return respuesta
 
 
 if __name__ == '__main__':

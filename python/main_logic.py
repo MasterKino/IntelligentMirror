@@ -13,6 +13,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @cross_origin(origin='*', headers=['Content-Type','Authorization'])
 def speak():
     data = request.data
+    if isinstance(data, bytes):
+        data = data.decode('utf-8')
     text = json.loads(data)['text']
     print(text)
     # speak_out_loud(text)
@@ -23,6 +25,8 @@ def speak():
 @cross_origin(origin='*', headers=['Content-Type','Authorization'])
 def answer():
     data = request.data
+    if isinstance(data, bytes):
+        data = data.decode('utf-8')
     text = json.loads(data)['text']
     # text = request.form['text']
     # print(text)
@@ -34,6 +38,8 @@ def answer():
 @cross_origin(origin='*', headers=['Content-Type','Authorization'])
 def name():
     data = request.data
+    if isinstance(data, bytes):
+        data = data.decode('utf-8')
     text = json.loads(data)['text']
     # text = request.form['text']
     # print(text)

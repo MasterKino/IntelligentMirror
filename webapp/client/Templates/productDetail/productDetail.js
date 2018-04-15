@@ -1,10 +1,14 @@
 import '../../Stylesheets/mirror_img.css';
 import '../../Stylesheets/modal.css';
 import '../../Stylesheets/microphone.css';
+import '../../Stylesheets/loading-layer.css';
 
 const opts = {
 	lang: 'en',
-	pythonRoute: 'name'
+	pythonRoute: 'name',
+	'loadingLayer': '.js-loading-layer',
+	'product_info': '.js-product-info',
+	'loaded': false
 };
 
 // Template.productDetail
@@ -39,6 +43,26 @@ Template.productDetail.destroyed = function() {
 
 Template.productDetail.onRendered(function () {
 	let instance = this;
+
+	if (!opts.loaded) {
+		setTimeout(function() {
+			document.querySelector(opts.loadingLayer).classList.add('in');
+		}, 100);
+
+		setTimeout(function() {
+			document.querySelector(opts.loadingLayer).classList.add('out');
+		}, 1400);
+
+		setTimeout(function() {
+			document.querySelector(opts.product_info).classList.add('loaded');
+		}, 1500);
+
+		opts.loaded = true;
+	} else {
+		const loader = document.querySelector(opts.loadingLayer);
+		loader.parentNode.removeChild(loader);
+		document.querySelector(opts.product_info).classList.add('loaded');
+	}
 });
 
 Template.productDetail.helpers({
@@ -69,7 +93,7 @@ Template.productDetail.events({
 		}
 	},
 	'click .js-submit-text'(event, instance) {
-		sendTextToVoice(document.querySelector('.js-input-text').value);
+		sendTextToVoice(document.querySelector('.js-input-text').value, instance);
 	},
 	'click .js-modal-close'(event, instance) {
 		event.currentTarget.parentElement.parentElement.classList.remove('visible');
@@ -87,49 +111,51 @@ function updateScroll(){
 	element.scrollTop = element.scrollHeight;
 }
 
-function sendTextToVoice(text) {
-	console.log('---[Sending Text Voice via Ajax]: ' + text);
+function sendTextToVoice(text, instance) {
+	if(instance.listening.get()) {
+		console.log('---[Sending Text Voice via Ajax]: ' + text);
 
-	let newLi = document.createElement('li');
-	newLi.appendChild(document.createTextNode(text));
-	newLi.classList.add('modal__question');
-	document.querySelector('.js-modal-list').appendChild(newLi);
+		let newLi = document.createElement('li');
+		newLi.appendChild(document.createTextNode(text));
+		newLi.classList.add('modal__question');
+		document.querySelector('.js-modal-list').appendChild(newLi);
 
-	$.ajax({
-		type: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		url:  'http://localhost:5000/' + opts.pythonRoute,
-		data: JSON.stringify({
-			text: text
-		}),
-		success: function(response) {
-			console.log('---[OK]: ');
-			console.log(response);
+		$.ajax({
+			type: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			url:  'http://localhost:5000/' + opts.pythonRoute,
+			data: JSON.stringify({
+				text: text
+			}),
+			success: function(response) {
+				console.log('---[OK]: ');
+				console.log(response);
 
-			opts.pythonRoute = 'answer';
+				opts.pythonRoute = 'answer';
 
-			if (response == 'assist') {
-				document.getElementById('audioModal').classList.remove('visible');
-				document.getElementById('SAModal').classList.add('visible');
-			} else {
-				let newLi = document.createElement('li');
-				newLi.appendChild(document.createTextNode(response));
-				newLi.classList.add('modal__answer');
+				if (response == 'assist') {
+					document.getElementById('audioModal').classList.remove('visible');
+					document.getElementById('SAModal').classList.add('visible');
+				} else {
+					let newLi = document.createElement('li');
+					newLi.appendChild(document.createTextNode(response));
+					newLi.classList.add('modal__answer');
 
-				setTimeout(function() {
-					document.querySelector('.js-modal-list').appendChild(newLi);
-					updateScroll();
-				}, 300)
+					setTimeout(function() {
+						document.querySelector('.js-modal-list').appendChild(newLi);
+						updateScroll();
+					}, 300)
+				}
+			},
+			error: function(response, error) {
+				console.log('---[KO]: ');
+				console.log(response);
+				console.log(error);
 			}
-		},
-		error: function(response, error) {
-			console.log('---[KO]: ');
-			console.log(response);
-			console.log(error);
-		}
-	});
+		});
+	}
 }
 
 function setupRecognition(instance) {
@@ -148,7 +174,7 @@ function setupRecognition(instance) {
 			instance.transcript.set(transcript);
 
 			if (result.isFinal) {
-				sendTextToVoice(transcript)
+				sendTextToVoice(transcript, instance);
 			}
 		}
 	};

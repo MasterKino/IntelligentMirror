@@ -1,6 +1,7 @@
 .product-detail {
     display: flex;
     height: calc(100vh - 84px);
+    position: relative;
 }
 
 .product-detail__info,
