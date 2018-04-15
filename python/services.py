@@ -21,14 +21,11 @@ size_phrase_list = ['are there other sizes',
 
 cart_phrase_list = ['put this to the cart',
                     'cart']
-wishlist_phrase_list = ['put this to the wish list',
-                        'wish list']
 
 keywords_list = ['assist',
                  'price',
                  'size',
-                 'cart',
-                 'wishlist']
+                 'cart']
 
 
 def get_human_names(text=''):
@@ -76,7 +73,6 @@ def get_keyword(text=None):
     scores.append(mean_similarity_to_list(text, price_phrase_list))
     scores.append(mean_similarity_to_list(text, size_phrase_list))
     scores.append(mean_similarity_to_list(text, cart_phrase_list))
-    scores.append(mean_similarity_to_list(text, wishlist_phrase_list))
     # for key, score in zip(keywords_list, scores):
     #     print('{} has score:\t {}'.format(key, round(score, 2)))
     keyword = keywords_list[int(np.argmax(scores))]
@@ -97,20 +93,18 @@ def get_name(text=''):
     return ''
 
 
-def answer(raw_input=''):
+def answerService(raw_input=''):
     keyword = get_keyword(raw_input)
     if keyword == 'price':
-        return '39.90 euros', keyword
+        return '34.95 euros'
     elif keyword == 'assist':
-        return 'Do you want me to call and assistant?', keyword
+        return 'assist'
     elif keyword == 'size':
-        return 'Would you want to know the available sizes for this product?', keyword
+        return 'The available sizes are S, M and L.'
     elif keyword == 'cart':
-        return 'Do you want to add this to your cart?', keyword
-    elif keyword == 'wishlist':
-        return 'Do you want to add this to your wishlist?', keyword
+        return 'Adding this product to your cart...'
     else:
-        return 'I did not understand that...', 'not_understood'
+        return 'I did not understand that...'
 
 
 def confirmation(raw_input='', keyword=''):
@@ -123,8 +117,6 @@ def confirmation(raw_input='', keyword=''):
             return 'Glad you asked, there are sizes S, M and L available in this store.'
         elif keyword == 'cart':
             return 'Successfully added to yout cart'
-        elif keyword == 'wishlist':
-            return 'Successfully added to your wishlist'
     else:
         return 'Okay, can I help you in anything else?'
 

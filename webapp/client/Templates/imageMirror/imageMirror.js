@@ -5,7 +5,7 @@ let opts = {
 
 Template.imageMirror.rendered = function() {
 	var img = new Image();
-	img.src = "http://localhost:5000/video_feed";
+	img.src = "http://localhost:5001/video_feed";
 	img.classList.add('mirror-img');
 	img.setAttribute("id", "video-feed");
 

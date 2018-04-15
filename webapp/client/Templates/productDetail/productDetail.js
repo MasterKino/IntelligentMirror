@@ -77,6 +77,17 @@ Template.productDetail.helpers({
 Template.productDetail.events = {
 	'click .js-toggle-mic'(event, instance) {
 		instance.listening.set(!instance.listening.get());
+
+		if (!document.querySelector('.js-modal-response').classList.contains('visible')) {
+
+			document.querySelector('.js-modal-response').classList.add('visible');
+			document.querySelector('.js-modal-header').classList.add('visible');
+
+			let newLi = document.createElement('li');
+			newLi.appendChild(document.createTextNode('What is your name?'));
+			newLi.classList.add('modal__answer');
+			document.querySelector('.js-modal-list').appendChild(newLi);
+		}
 	},
 	'click .js-submit-text'(event, instance) {
 		sendTextToVoice(document.querySelector('.js-input-text').value);
@@ -118,17 +129,19 @@ function sendTextToVoice(text) {
 			console.log('---[OK]: ');
 			console.log(response);
 
-			document.querySelector('.js-modal-response').classList.add('visible');
-			document.querySelector('.js-modal-header').classList.add('visible');
+			if (response == 'assist') {
+				document.getElementById('audioModal').classList.remove('visible');
+				document.getElementById('SAModal').classList.add('visible');
+			} else {
+				let newLi = document.createElement('li');
+				newLi.appendChild(document.createTextNode(response));
+				newLi.classList.add('modal__answer');
 
-			let newLi = document.createElement('li');
-			newLi.appendChild(document.createTextNode(response));
-			newLi.classList.add('modal__answer');
-
-			setTimeout(function() {
-				document.querySelector('.js-modal-list').appendChild(newLi);
-				updateScroll();
-			}, 300)
+				setTimeout(function() {
+					document.querySelector('.js-modal-list').appendChild(newLi);
+					updateScroll();
+				}, 300)
+			}
 		},
 		error: function(response, error) {
 			console.log('---[KO]: ');
