@@ -56,7 +56,10 @@ Template.productDetail.helpers({
 Template.productDetail.events({
 	'click .js-toggle-mic'(event, instance) {
 		instance.listening.set(!instance.listening.get());
+<<<<<<< HEAD
 		document.querySelector('.js-toggle-mic').classList.toggle('microphone--active');
+=======
+>>>>>>> ea4b75da4e436f4801c890361afadde44e4602f7
 
 		if (!document.querySelector('.js-modal-response').classList.contains('visible')) {
 
@@ -89,6 +92,7 @@ function updateScroll(){
 }
 
 function sendTextToVoice(text) {
+<<<<<<< HEAD
 
 	if(Template.instance().listening.get()) {
 		console.log('---[Sending Text Voice via Ajax]: ' + text);
@@ -134,6 +138,50 @@ function sendTextToVoice(text) {
 			}
 		});
 	}
+=======
+	console.log('---[Sending Text Voice via Ajax]: ' + text);
+
+	let newLi = document.createElement('li');
+	newLi.appendChild(document.createTextNode(text));
+	newLi.classList.add('modal__question');
+	document.querySelector('.js-modal-list').appendChild(newLi);
+
+	$.ajax({
+		type: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		url:  'http://localhost:5000/' + opts.pythonRoute,
+		data: JSON.stringify({
+			text: text
+		}),
+		success: function(response) {
+			console.log('---[OK]: ');
+			console.log(response);
+
+			opts.pythonRoute = 'answer';
+
+			if (response == 'assist') {
+				document.getElementById('audioModal').classList.remove('visible');
+				document.getElementById('SAModal').classList.add('visible');
+			} else {
+				let newLi = document.createElement('li');
+				newLi.appendChild(document.createTextNode(response));
+				newLi.classList.add('modal__answer');
+
+				setTimeout(function() {
+					document.querySelector('.js-modal-list').appendChild(newLi);
+					updateScroll();
+				}, 300)
+			}
+		},
+		error: function(response, error) {
+			console.log('---[KO]: ');
+			console.log(response);
+			console.log(error);
+		}
+	});
+>>>>>>> ea4b75da4e436f4801c890361afadde44e4602f7
 }
 
 function setupRecognition(instance) {
