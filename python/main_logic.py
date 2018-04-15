@@ -1,7 +1,7 @@
 import json
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-from services import answerService, speak_out_loud
+from services import answerService, store_name, speak_out_loud
 # from services import answer, confirmation, speak_out_loud
 
 app = Flask(__name__)
@@ -27,6 +27,17 @@ def answer():
     # text = request.form['text']
     # print(text)
     response = answerService(text)
+    return response
+
+
+@app.route('/name', methods=['GET', 'POST'])
+@cross_origin(origin='*', headers=['Content-Type','Authorization'])
+def name():
+    data = request.data
+    text = json.loads(data)['text']
+    # text = request.form['text']
+    # print(text)
+    response = store_name(text)
     return response
 
 

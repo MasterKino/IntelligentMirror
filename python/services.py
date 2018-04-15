@@ -107,18 +107,18 @@ def answerService(raw_input=''):
         return 'I did not understand that...'
 
 
-def confirmation(raw_input='', keyword=''):
-    yes_score = mean_similarity_to_list(raw_input, ['yes', 'affirmative', 'sure'])
-    nop_score = mean_similarity_to_list(raw_input, ['no', 'negative'])
-    if yes_score > nop_score:
-        if keyword == 'assist':
-            return 'Okay, calling an assistant!'
-        elif keyword == 'size':
-            return 'Glad you asked, there are sizes S, M and L available in this store.'
-        elif keyword == 'cart':
-            return 'Successfully added to yout cart'
-    else:
-        return 'Okay, can I help you in anything else?'
+# def confirmation(raw_input='', keyword=''):
+#     yes_score = mean_similarity_to_list(raw_input, ['yes', 'affirmative', 'sure'])
+#     nop_score = mean_similarity_to_list(raw_input, ['no', 'negative'])
+#     if yes_score > nop_score:
+#         if keyword == 'assist':
+#             return 'Okay, calling an assistant!'
+#         elif keyword == 'size':
+#             return 'Glad you asked, there are sizes S, M and L available in this store.'
+#         elif keyword == 'cart':
+#             return 'Successfully added to yout cart'
+#     else:
+#         return 'Okay, can I help you in anything else?'
 
 
 def store_name(raw_input=''):
