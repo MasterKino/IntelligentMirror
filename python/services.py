@@ -57,8 +57,8 @@ def get_human_names(text=''):
 def speak_out_loud(text=''):
     tts = gTTS(text=text, lang='en-uk')
     tts.save("tmp.mp3")
-    os.system("mpg321 tmp.mp3")
-    os.system("rm tmp.mp3")
+    os.system("mpg321 tmp.mp3 &")
+    # os.system("rm tmp.mp3")
 
 
 def mean_similarity_to_list(phrase=None, phrase_list=None):
