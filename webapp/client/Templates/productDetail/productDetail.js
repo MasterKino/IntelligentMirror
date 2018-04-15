@@ -7,13 +7,12 @@ const opts = {
 };
 
 // Template.productDetail
-Template.productDetail.created = function() {
+Template.productDetail.onCreated(function() {
 	let instance = this;
 
 	instance.transcript = new ReactiveVar('');
 	instance.transcriptFinalized = new ReactiveVar(false);
 	instance.listening = new ReactiveVar(false);
-	instance.recastResult = new ReactiveVar(null);
 
 	instance.autorun(() => {
 		if (instance.recognition) {
@@ -31,11 +30,15 @@ Template.productDetail.created = function() {
 			instance.recognition.stop();
 		}
 	});
-};
+});
 
 Template.productDetail.destroyed = function() {
 	this.recognition.stop();
 };
+
+Template.productDetail.onRendered(function () {
+	let instance = this;
+});
 
 Template.productDetail.helpers({
 	getTranscript() {
@@ -45,36 +48,12 @@ Template.productDetail.helpers({
 		return Template.instance().transcriptFinalized.get();
 	},
 	isListening() {
+		console.log("Is listening");
 		return Template.instance().listening.get();
-	},
-	recastSlugIs(compareSlug) {
-		let { intent } = Template.instance().recastResult.get();
-
-		if (intent) {
-			return intent.slug === compareSlug;
-		}
-	},
-	recastSlugKnown() {
-		let result = Template.instance().recastResult.get();
-
-		if (!result || !result.intent) return false;
-
-		// forget why I have this check
-		return result.intent.slug.length > 0;
-	},
-	getRecastResult() {
-		return Template.instance().recastResult.get();
-	},
-	recastColor() {
-		let { entities } = Template.instance().recastResult.get();
-
-		return (
-			entities && entities.color && entities.color[0].raw.toLowerCase()
-		);
 	}
 });
 
-Template.productDetail.events = {
+Template.productDetail.events({
 	'click .js-toggle-mic'(event, instance) {
 		instance.listening.set(!instance.listening.get());
 
@@ -101,7 +80,7 @@ Template.productDetail.events = {
 	'click .js-audio-modal'(event, instance) {
 		document.getElementById('audioModal').classList.add('visible');
 	}
-};
+});
 
 function updateScroll(){
 	var element = document.querySelector(".js-modal-list");
@@ -116,18 +95,22 @@ function sendTextToVoice(text) {
 	newLi.classList.add('modal__question');
 	document.querySelector('.js-modal-list').appendChild(newLi);
 
+	let firstComm = false;
+
 	$.ajax({
 		type: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		url: 'http://localhost:5000/answer',
+		url: firstComm ? 'http://localhost:5000/answer' : 'http://localhost:5000/name',
 		data: JSON.stringify({
 			text: text
 		}),
 		success: function(response) {
 			console.log('---[OK]: ');
 			console.log(response);
+
+			firstComm = true;
 
 			if (response == 'assist') {
 				document.getElementById('audioModal').classList.remove('visible');
@@ -176,37 +159,3 @@ function setupRecognition(instance) {
 		console.log('error', event);
 	};
 }
-
-//---------Ajax for red colour----------
-
-// if (result.intent.confidence > 0.6) {
-// 	instance.recastResult.set(result);
-//
-// 	let thing = '';
-// 	if (
-// 		result.intent &&
-// 		result.intent.slug === 'change-shirt-color' &&
-// 		result.entities.color
-// 	) {
-//
-// 		$.ajax({
-// 			type: 'POST',
-// 			headers: {
-// 				'Content-Type': 'application/json'
-// 			},
-// 			url: 'http://localhost:5000/load_ajax',
-// 			data: JSON.stringify({
-// 				color: result.entities.color[0].rgb
-// 			}),
-// 			success: function(response) {
-// 				console.log('OK : ');
-// 				console.log(response);
-// 			},
-// 			error: function(response, error) {
-// 				console.log('KO : ');
-// 				console.log(response);
-// 				console.log(error);
-// 			}
-// 		});
-// 	}
-// }
