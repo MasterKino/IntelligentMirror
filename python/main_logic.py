@@ -2,7 +2,6 @@ import json
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from services import answerService, store_name, speak_out_loud
-# from services import answer, confirmation, speak_out_loud
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/foo": {"origins": "*"}})
@@ -31,6 +30,7 @@ def answer():
     # text = request.form['text']
     # print(text)
     response = answerService(text)
+    speak_out_loud(response)
     return response
 
 
@@ -44,21 +44,8 @@ def name():
     # text = request.form['text']
     # print(text)
     response = store_name(text)
+    speak_out_loud(response)
     return response
-
-
-# @app.route('/confirmation', methods=['GET', 'POST'])
-# @cross_origin(origin='*', headers=['Content-Type','Authorization'])
-# def question_confirmation():
-#     # data = request.data
-#     # text = json.loads(data)['text']
-#     # keyword = json.loads(data)['keyword']
-#     text = request.form['text']
-#     keyword = request.form['keyword']
-#     print(text)
-#     print(keyword)
-#     response = confirmation(text, keyword)
-#     return response
 
 
 if __name__ == '__main__':
