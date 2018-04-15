@@ -20,10 +20,6 @@
     opacity: 0;
     transition: opacity .4s ease-out;
     transition-delay: .5s;
-<<<<<<< HEAD
-    max-width: 680px;
-=======
->>>>>>> ea4b75da4e436f4801c890361afadde44e4602f7
 }
 
 .product-detail__info.loaded {

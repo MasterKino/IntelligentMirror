@@ -22,11 +22,7 @@
     z-index: 0;
 }
 
-<<<<<<< HEAD
 .microphone.active span {
-=======
-.microphone--active span {
->>>>>>> ea4b75da4e436f4801c890361afadde44e4602f7
     background-color: rgba(2, 134, 205);
     animation: pulse 1.5s infinite;
 }
@@ -54,11 +50,7 @@
 
 @keyframes pulse {
     0% {
-<<<<<<< HEAD
         opacity: .7;
-=======
-        opacity: .6;
->>>>>>> ea4b75da4e436f4801c890361afadde44e4602f7
         height: 50px;
         width: 50px;
     }

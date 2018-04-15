@@ -79,17 +79,12 @@
     background-color: #f5f5f5;
     border-radius: 6px;
     margin: 0 auto;
-<<<<<<< HEAD
     height: 80%;
-=======
-    height: 90%;
->>>>>>> ea4b75da4e436f4801c890361afadde44e4602f7
     padding: 2rem 5rem;
     overflow-y: scroll;
     width: 90%;
 }
 
-<<<<<<< HEAD
 .modal__footer {
     margin: 0 auto;
     width: 90%;
@@ -128,8 +123,6 @@
     box-sizing: none;
 }
 
-=======
->>>>>>> ea4b75da4e436f4801c890361afadde44e4602f7
 .modal__answer,
 .modal__question {
     background-color: rgba(200, 203, 204, .6);
@@ -173,13 +166,10 @@
     margin-left: 5px;
 }
 
-<<<<<<< HEAD
 .modal__question:nth-child(2):after {
     display: none;
 }
 
-=======
->>>>>>> ea4b75da4e436f4801c890361afadde44e4602f7
 .modal__answer:after {
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
