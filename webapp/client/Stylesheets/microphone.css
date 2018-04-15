@@ -22,7 +22,7 @@
     z-index: 0;
 }
 
-.microphone--active span {
+.microphone.active span {
     background-color: rgba(2, 134, 205);
     animation: pulse 1.5s infinite;
 }
@@ -50,7 +50,7 @@
 
 @keyframes pulse {
     0% {
-        opacity: .6;
+        opacity: .7;
         height: 50px;
         width: 50px;
     }

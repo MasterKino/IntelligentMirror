@@ -56,6 +56,7 @@ Template.productDetail.helpers({
 Template.productDetail.events({
 	'click .js-toggle-mic'(event, instance) {
 		instance.listening.set(!instance.listening.get());
+		document.querySelector('.js-toggle-mic').classList.toggle('microphone--active');
 
 		if (!document.querySelector('.js-modal-response').classList.contains('visible')) {
 
@@ -88,48 +89,51 @@ function updateScroll(){
 }
 
 function sendTextToVoice(text) {
-	console.log('---[Sending Text Voice via Ajax]: ' + text);
 
-	let newLi = document.createElement('li');
-	newLi.appendChild(document.createTextNode(text));
-	newLi.classList.add('modal__question');
-	document.querySelector('.js-modal-list').appendChild(newLi);
+	if(Template.instance().listening.get()) {
+		console.log('---[Sending Text Voice via Ajax]: ' + text);
 
-	$.ajax({
-		type: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		url:  'http://localhost:5000/' + opts.pythonRoute,
-		data: JSON.stringify({
-			text: text
-		}),
-		success: function(response) {
-			console.log('---[OK]: ');
-			console.log(response);
+		let newLi = document.createElement('li');
+		newLi.appendChild(document.createTextNode(text));
+		newLi.classList.add('modal__question');
+		document.querySelector('.js-modal-list').appendChild(newLi);
 
-			opts.pythonRoute = 'answer';
+		$.ajax({
+			type: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			url:  'http://localhost:5000/' + opts.pythonRoute,
+			data: JSON.stringify({
+				text: text
+			}),
+			success: function(response) {
+				console.log('---[OK]: ');
+				console.log(response);
 
-			if (response == 'assist') {
-				document.getElementById('audioModal').classList.remove('visible');
-				document.getElementById('SAModal').classList.add('visible');
-			} else {
-				let newLi = document.createElement('li');
-				newLi.appendChild(document.createTextNode(response));
-				newLi.classList.add('modal__answer');
+				opts.pythonRoute = 'answer';
 
-				setTimeout(function() {
-					document.querySelector('.js-modal-list').appendChild(newLi);
-					updateScroll();
-				}, 300)
+				if (response == 'assist') {
+					document.getElementById('audioModal').classList.remove('visible');
+					document.getElementById('SAModal').classList.add('visible');
+				} else {
+					let newLi = document.createElement('li');
+					newLi.appendChild(document.createTextNode(response));
+					newLi.classList.add('modal__answer');
+
+					setTimeout(function() {
+						document.querySelector('.js-modal-list').appendChild(newLi);
+						updateScroll();
+					}, 300)
+				}
+			},
+			error: function(response, error) {
+				console.log('---[KO]: ');
+				console.log(response);
+				console.log(error);
 			}
-		},
-		error: function(response, error) {
-			console.log('---[KO]: ');
-			console.log(response);
-			console.log(error);
-		}
-	});
+		});
+	}
 }
 
 function setupRecognition(instance) {
