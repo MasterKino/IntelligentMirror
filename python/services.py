@@ -9,18 +9,24 @@ nlp = spacy.load('en')
 assistant_phrase_list = ['call an assistant',
                          'call some help',
                          'i need help',
-                         'i need assistance']
+                         'i need assistance',
+                         'call a sales manager']
 
 price_phrase_list = ['how much does it cost',
                      'what is the price',
-                     'how expensive is this']
+                     'how expensive is this',
+                     'how much money is it',
+                     'is it very expensive']
 
 size_phrase_list = ['are there other sizes',
                     'this is too small',
-                    'this is too large']
+                    'this is too large',
+                    'this is too loose',
+                    'this is too tight']
 
 cart_phrase_list = ['put this to the cart',
-                    'cart']
+                    'add it to the shopping cart',
+                    'i want to buy it']
 
 keywords_list = ['assist',
                  'price',

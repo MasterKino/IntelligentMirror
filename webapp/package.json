@@ -8,7 +8,7 @@
 		"@babel/runtime": "^7.0.0-beta.42",
 		"emitter": "0.0.5",
 		"fibers": "^2.0.2",
-		"html2canvas": "^1.0.0-alpha.11",
+		"html2canvas": "^1.0.0-alpha.12",
 		"meteor-node-stubs": "^0.3.2",
 		"normalize.css": "^8.0.0",
 		"recastai": "^3.7.0",
