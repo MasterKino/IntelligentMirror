@@ -93,7 +93,7 @@ Template.productDetail.events({
 		}
 	},
 	'click .js-submit-text'(event, instance) {
-		sendTextToVoice(document.querySelector('.js-input-text').value);
+		sendTextToVoice(document.querySelector('.js-input-text').value, instance);
 	},
 	'click .js-modal-close'(event, instance) {
 		event.currentTarget.parentElement.parentElement.classList.remove('visible');
@@ -111,8 +111,8 @@ function updateScroll(){
 	element.scrollTop = element.scrollHeight;
 }
 
-function sendTextToVoice(text) {
-	if(Template.instance().listening.get()) {
+function sendTextToVoice(text, instance) {
+	if(instance.listening.get()) {
 		console.log('---[Sending Text Voice via Ajax]: ' + text);
 
 		let newLi = document.createElement('li');
@@ -174,7 +174,7 @@ function setupRecognition(instance) {
 			instance.transcript.set(transcript);
 
 			if (result.isFinal) {
-				sendTextToVoice(transcript)
+				sendTextToVoice(transcript, instance);
 			}
 		}
 	};
