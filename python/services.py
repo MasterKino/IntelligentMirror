@@ -104,7 +104,7 @@ def answerService(raw_input=''):
     if keyword == 'price':
         return '34.95 euros'
     elif keyword == 'assist':
-        return 'assist'
+        return 'Let me call a sales assistant for you...'
     elif keyword == 'size':
         return 'The available sizes are S, M and L.'
     elif keyword == 'cart':
