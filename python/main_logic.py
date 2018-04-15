@@ -1,7 +1,8 @@
 import json
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-from services import answer, confirmation, speak_out_loud
+from services import answerService, speak_out_loud
+# from services import answer, confirmation, speak_out_loud
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/foo": {"origins": "*"}})
@@ -20,27 +21,27 @@ def speak():
 
 @app.route('/answer', methods=['GET', 'POST'])
 @cross_origin(origin='*', headers=['Content-Type','Authorization'])
-def answer_question():
+def answer():
     data = request.data
     text = json.loads(data)['text']
     # text = request.form['text']
     # print(text)
-    response, keyword = answer(text)
+    response = answerService(text)
     return response
 
 
-@app.route('/confirmation', methods=['GET', 'POST'])
-@cross_origin(origin='*', headers=['Content-Type','Authorization'])
-def question_confirmation():
-    # data = request.data
-    # text = json.loads(data)['text']
-    # keyword = json.loads(data)['keyword']
-    text = request.form['text']
-    keyword = request.form['keyword']
-    print(text)
-    print(keyword)
-    response = confirmation(text, keyword)
-    return response
+# @app.route('/confirmation', methods=['GET', 'POST'])
+# @cross_origin(origin='*', headers=['Content-Type','Authorization'])
+# def question_confirmation():
+#     # data = request.data
+#     # text = json.loads(data)['text']
+#     # keyword = json.loads(data)['keyword']
+#     text = request.form['text']
+#     keyword = request.form['keyword']
+#     print(text)
+#     print(keyword)
+#     response = confirmation(text, keyword)
+#     return response
 
 
 if __name__ == '__main__':
