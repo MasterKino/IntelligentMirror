@@ -3,7 +3,8 @@ import '../../Stylesheets/modal.css';
 import '../../Stylesheets/microphone.css';
 
 const opts = {
-	lang: 'en'
+	lang: 'en',
+	pythonRoute: 'name'
 };
 
 // Template.productDetail
@@ -48,7 +49,6 @@ Template.productDetail.helpers({
 		return Template.instance().transcriptFinalized.get();
 	},
 	isListening() {
-		console.log("Is listening");
 		return Template.instance().listening.get();
 	}
 });
@@ -95,14 +95,12 @@ function sendTextToVoice(text) {
 	newLi.classList.add('modal__question');
 	document.querySelector('.js-modal-list').appendChild(newLi);
 
-	let firstComm = false;
-
 	$.ajax({
 		type: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		url: firstComm ? 'http://localhost:5000/answer' : 'http://localhost:5000/name',
+		url:  'http://localhost:5000/' + opts.pythonRoute,
 		data: JSON.stringify({
 			text: text
 		}),
@@ -110,7 +108,7 @@ function sendTextToVoice(text) {
 			console.log('---[OK]: ');
 			console.log(response);
 
-			firstComm = true;
+			opts.pythonRoute = 'answer';
 
 			if (response == 'assist') {
 				document.getElementById('audioModal').classList.remove('visible');
