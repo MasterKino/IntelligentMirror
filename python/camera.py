@@ -50,6 +50,7 @@ class VideoCamera(object):
     def get_frame(self):
         success, image = self.video.read()
         if success:
+            image = cv2.flip(image, flipCode=1)
             (h, w, d) = image.shape
             # w:h == 11:16
             width = math.floor((11*h/16)/2)

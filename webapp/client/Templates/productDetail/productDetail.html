@@ -1,16 +1,21 @@
 <template name="productDetail">
     {{> headermain toggleView='mirror' toggleText='Toggle Mirror View'}}
     <main class="product-detail">
+        <div class="loading-layer js-loading-layer">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <div class="product-detail__mirror">
             {{> imageMirror}}
         </div>
-        <div class="product-detail__info js-product-info loaded">
+        <div class="product-detail__info js-product-info">
             <button type="button" class="js-audio-modal product-detail__mic">
                 <img src="/img/mic.svg" alt=""/>
             </button>
             <div class="product-detail__product">
                 <img src="/img/product.jpg" alt="">
-                <h1 class="t-h1">3-STRIPES TEE</h1>
+                <h1 class="t-h1">WARM-UP SWEATSHIRT</h1>
                 <p class="product-detail__price">€ 34,95</p>
                 <h3>Available Sizes:</h3>
                 <div class="product-detail__sizes">
@@ -24,6 +29,25 @@
             {{> relatedProducts}}
         </div>
     </main>
-    {{> modalAudio}}
+    <div id="audioModal" class="modal js-modal">
+        <div class="modal__content">
+            <button type="button" name="button" class="modal__close js-modal-close">&times;</button>
+            <div class="modal__header js-modal-header">
+                <button type="button" class="js-toggle-mic microphone {{#if isListening}}active{{/if}}">
+                    <img src="/img/mic.svg" alt=""/>
+                    <span></span>
+                </button>
+            </div>
+            <div class="modal__body js-modal-response">
+                <ul class="modal__response js-modal-list"></ul>
+                <div class="modal__footer">
+                    <input type="text" name="" value="" class="js-input-text" placeholder="What is the price?">
+                    <button type="button" name="button" class="button button--primary js-submit-text">
+                        Send text
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     {{> modalSA}}
 </template>
